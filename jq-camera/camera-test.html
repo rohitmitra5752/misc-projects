@@ -11,6 +11,11 @@
 			{
 				display:none;
 			}
+			#snapList
+			{
+				overflow-y:auto;
+				max-height:300px;
+			}
 			#snapList>div
 			{
 				margin-left:10px;
@@ -18,6 +23,12 @@
 			.cameraContainer
 			{
 				position:relative;
+			}
+			.cameraContainer>canvas
+			{
+				position:absolute;
+				top:0px;
+				left:0px;
 			}
 			.cameraContainer>#snap
 			{
@@ -27,7 +38,8 @@
 				background:transparent;
 				border-width:0px;
 				opacity:0.2;
-			}.cameraContainer>#snap:hover
+			}
+			.cameraContainer>#snap:hover
 			{
 				opacity:1;
 			}
@@ -60,10 +72,12 @@
 				
 				$("#snap").click(function(){
 					$("#canvas")[0].getContext("2d").drawImage(video, 0, 0, 640, 480);
+					$("#canvas").show();
 					var imgDiv = $("<div>").imgPrev({
 						src:$("#canvas")[0].toDataURL("image/jpeg")
 					});
 					$("#snapList").append(imgDiv);
+					$("#canvas").fadeOut(1000);
 				});
 				$("#zoomPreview").imgZoom();
 			});
@@ -72,9 +86,9 @@
 	<body>
 		<div class="cameraContainer">
 			<video id="videoCanvas" width="640" height="480" autoplay></video>
+			<canvas id="canvas" width="640" height="480"></canvas>
 			<button id="snap"><img src="images/snap.png" alt="Take a Pic" /></button>
 		</div>
-		<canvas id="canvas" width="640" height="480"></canvas>
 		<div id="snapList"></div>
 		<div id="zoomPreview"></div>
 	</body>
