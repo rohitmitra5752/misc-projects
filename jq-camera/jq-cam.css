@@ -1,0 +1,83 @@
+.hazyImage
+{
+	opacity:0.1;
+}
+.imgContainer
+{
+	position:relative;
+	display:inline-block;
+}
+.imgContainer>img
+{
+	height:256px;
+	width:256px;
+}
+.imgContainer button
+{
+	background-color:transparent;
+	border-width:0px;
+}
+.btnRemove
+{
+	position:absolute;
+	right:0px;
+	top:0px;
+	padding:5px;
+}
+.btnSave
+{
+	position:absolute;
+	left:0px;
+	top:0px;
+	padding:5px;
+	z-index:100;
+}
+.btnZoom
+{
+	position:absolute;
+	left:112px;
+	top:112px;
+	z-index:100;
+}
+.hoverButtons
+{
+	display:none;
+	opacity:0.5;
+}
+.hoverButtons:hover
+{
+	opacity:1;
+}
+.hoverButtons>img
+{
+	height:32px;
+	width:32px;
+}
+.zoomedImage
+{
+	height:100%;
+	width:100%;
+	display:none;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background:rgba(0,0,0,0.3);
+	padding:200px 500px;
+	z-index:100;
+}
+.zoomedImage>.closeZoom
+{
+	position:absolute;
+	left:500px;
+	top:200px;
+	opacity:0.5;
+}
+.zoomedImage>.closeZoom:hover
+{
+	opacity:1;
+}
+.zoomedImage>.closeZoom>img
+{
+	height:32px;
+	width:32px;
+}

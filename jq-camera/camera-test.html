@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="jq-cam.css" />
+		<script src="jq-cam.js"></script>
+		<style>
+			canvas
+			{
+				display:none;
+			}
+			#snapList>div
+			{
+				margin-left:10px;
+			}
+			.cameraContainer
+			{
+				position:relative;
+			}
+			.cameraContainer>#snap
+			{
+				position:absolute;
+				top:224px;
+				left:304px;
+				background:transparent;
+				border-width:0px;
+				opacity:0.2;
+			}.cameraContainer>#snap:hover
+			{
+				opacity:1;
+			}
+			.cameraContainer>#snap>img
+			{
+				height:32px;
+				width:32px;
+			}
+		</style>
+		<script>
+			$(function(){
+				var video = $("#videoCanvas")[0];
+				var videoObj = { "video": true };
+				var errBack = function(error) {
+						console.log("Video capture error: ", error.code); 
+					};
+
+				// Put video listeners into place
+				if(navigator.getUserMedia) { // Standard
+					navigator.getUserMedia(videoObj, function(stream) {
+						video.src = stream;
+						video.play();
+					}, errBack);
+				} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+					navigator.webkitGetUserMedia(videoObj, function(stream){
+						video.src = window.webkitURL.createObjectURL(stream);
+						video.play();
+					}, errBack);
+				}
+				
+				$("#snap").click(function(){
+					$("#canvas")[0].getContext("2d").drawImage(video, 0, 0, 640, 480);
+					var imgDiv = $("<div>").imgPrev({
+						src:$("#canvas")[0].toDataURL("image/jpeg")
+					});
+					$("#snapList").append(imgDiv);
+				});
+				$("#zoomPreview").imgZoom();
+			});
+		</script>
+	</head>
+	<body>
+		<div class="cameraContainer">
+			<video id="videoCanvas" width="640" height="480" autoplay></video>
+			<button id="snap"><img src="images/snap.png" alt="Take a Pic" /></button>
+		</div>
+		<canvas id="canvas" width="640" height="480"></canvas>
+		<div id="snapList"></div>
+		<div id="zoomPreview"></div>
+	</body>
+</html>
