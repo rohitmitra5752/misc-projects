@@ -47,6 +47,7 @@
 .hoverButtons:hover
 {
 	opacity:1;
+	cursor:pointer;
 }
 .hoverButtons>img
 {
@@ -71,10 +72,14 @@
 	left:500px;
 	top:200px;
 	opacity:0.5;
+	background:transparent;
+	border-width:0px;
 }
 .zoomedImage>.closeZoom:hover
 {
 	opacity:1;
+	cursor:pointer;
+	background:rgba(255,255,255,0.5);
 }
 .zoomedImage>.closeZoom>img
 {
